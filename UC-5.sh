@@ -26,3 +26,4 @@ do
 done
 echo "SALARY=$salary"
 echo "TOTAL SALARY=$totalSalary"
+
