@@ -1,26 +1,33 @@
 #!/bin/bash
-fullWorkingHours=100;
-partWorkingHours=50;
-workingDays=30;
 
-function calculateSalary(){
-   local workingDays=20;
-   echo $workingDays
-   read -p "If you are working part time enter 1 and if you are working full time enter 2 : " work
-   if [ $work -eq 1 ]
-   then
-      n=$(echo |awk '{print one*two*three}' one=$fullWorkingHours two=$workingDays three=$1)
-      echo $n
-   elif [ $work -eq 2 ]
-   then
-      n=$(echo |awk '{print one*two*three}' one=$partWorkingHours two=$workingDays three=$1)
-      echo $n
-   else
-      echo "Wrong input"
-   fi
-   return 10
-}
-calculateSalary 92.5
-value=$?
-echo $value
-echo $val
+IS_PART_TIME=1;
+IS_FULL_TIME=2;
+MAX_HRS_IN_MONTH=10;
+EMP_RATE_PER_HR=20;
+NUM_WORKING_DAYS=20;
+
+totalEmpHr=0;
+totalWorkingDays=0;
+
+while [[ $totalEmpHr -lt $MAX_HRS_IN_MONTH && $totalWorkingDays -lt $NUM_WORKING_DAYS ]]
+do
+   ((totalWorkingDays++))
+   empCheck=$((RANDOM%3));
+	case $empCheck in
+		$IS_FULL_TIME)
+			empHrs=8
+				;;
+		$IS_PART_TIME)
+			empHrs=4
+				;;
+		*)
+			empHrs=0
+				;;
+	esac
+   totalEmpHrs=$(($totalEmpHrs+$empHrs))
+done
+
+totalSalary=$(($totalEmpHrs*$EMP_RATE_PER_HR));
+echo "TOTAL EMPLOYEE HOURS=$totalEmpHrs"
+echo "TOTAL SALARY=$totalSalary"
+
